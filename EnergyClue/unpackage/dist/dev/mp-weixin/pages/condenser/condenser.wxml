@@ -1,0 +1,1 @@
+<view id="arg"><button id="btn" data-event-opts="{{[['tap',[['setupSelect',[this]]]]]}}" bindtap="__e">click me</button></view>

@@ -1,0 +1,68 @@
+
+.content {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+.input-content {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	margin-left: 10rpx;
+	margin-right: 10rpx;
+}
+.input-area {
+	flex: 1 1 auto;
+}
+.input-item {
+	display: flex;
+	flex-direction: row;
+}
+.arg {
+	width: 80px;
+	margin-right: 5rpx;
+	background-color: lightgray;
+	padding-left: 5px;
+}
+.val {
+	width: 100px;
+	margin-right: 5rpx;
+	background-color: lightgreen;
+	flex: 1 1 auto;
+	padding-left: 5px;
+}
+.unit {
+	width: 80px;
+	color: blue;
+	background-color: lightgray;
+	padding-left: 5px;
+}
+.calc {
+	background-color: gray;
+	margin-left: 5rpx;
+}
+.result-content {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+.result-head {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	color: red;
+	font-weight: bold;
+	text-align: center;
+}
+.result-item {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	text-align: center;
+	margin-top: 10rpx;
+}
+
+
+
