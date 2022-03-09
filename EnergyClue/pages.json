@@ -10,7 +10,16 @@
             "path" : "pages/condenser/condenser",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "凝汽器",
+                "navigationBarTitleText": "凝汽器变工况计算",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+	    ,{
+            "path" : "pages/condenser/cleanliness",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "凝汽器清洁度",
                 "enablePullDownRefresh": false
             }
             

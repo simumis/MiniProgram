@@ -1,5 +1,3 @@
 # MiniProgram
 
-Simple calculation tool for energy saving in thermal power plants - sctfesitpp
-
-火电厂节能简单计算小工具
+在这里想做一些小工具，主要集中于火电厂的简单计算。

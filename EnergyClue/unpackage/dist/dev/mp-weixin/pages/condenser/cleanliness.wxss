@@ -1,27 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*每个页面公共css */
-.content {
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-	justify-content: space-between;
-	width: 100%;
-	background-color: lightgray;
-}
 label {
 	color: red;
 	font-weight: bold;
@@ -34,13 +11,9 @@ label {
 	flex-direction: row;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	padding-left: 5px;
-	padding-right: 5px;
 }
-.calc button {
+button {
 	flex: 1 1 auto;
-	margin-left: 2px;
-	margin-right: 2px;
 }
 .input-content, .result-content {
 	display: flex;
@@ -49,7 +22,6 @@ label {
 .input-item, .result-item {
 	display: flex;
 	flex-direction: row;
-	margin-top: 5px;
 }
 .input-name, .result-name {
 	text-align: right;
@@ -98,5 +70,4 @@ label {
 	padding-right: 5px;
 	padding-bottom: 10px;
 }
-
 

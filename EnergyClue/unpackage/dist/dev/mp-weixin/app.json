@@ -2,7 +2,9 @@
   "pages": [
     "pages/index/index",
     "pages/condenser/condenser",
-    "pages/if97/if97"
+    "pages/condenser/cleanliness",
+    "pages/if97/if97",
+    "pages/about/about"
   ],
   "subPackages": [],
   "window": {
@@ -11,6 +13,5 @@
     "navigationBarBackgroundColor": "#007AFF",
     "backgroundColor": "#0000FF"
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

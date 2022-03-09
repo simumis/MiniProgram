@@ -1,41 +1,42 @@
 <template>
+	<!-- 底层容器 -->
 	<view class="content">
+		<label>输入区域：</label>
 		<!-- 输入容器，包含输入区域和计算按钮-->
 		<view class="input-content">
-			<!-- 输入区域，包含参数1和参数2，纵向排列 -->
-			<view class="input-area">
-				<!-- 输入项，包含选项、数值和单位，横向排列 -->
-				<view class="input-item">
-					<picker class="arg" @change="onSelect1" :value="index1" :range="select1">{{select1[index1]}}</picker>
-					<input class="val" type="digit" placeholder="请输入数据" v-model="value1"/>
-					<view class="unit"><text>{{unit1}}</text></view>
-				</view>
-				<!-- 输入项，包含选项、数值和单位，横向排列 -->
-				<view class="input-item">
-					<picker class="arg" @change="onSelect2" :value="index2" :range="select2">{{select2[index2]}}</picker>
-					<input class="val" type="digit" placeholder="请输入数据" v-model="value2" />
-					<view class="unit"><text>{{unit2}}</text></view>
-				</view>
+			<!-- 输入项，包含选项、数值和单位，横向排列 -->
+			<view class="input-item">
+				<picker class="input-picker" @change="onSelect1" :value="index1" :range="select1">{{select1[index1]}}</picker>
+				<input class="input-val" type="digit" placeholder="请输入数据" v-model="value1"/>
+				<view class="input-unit"><text>{{unit1}}</text></view>
+			</view>
+			<!-- 输入项，包含选项、数值和单位，横向排列 -->
+			<view class="input-item">
+				<picker class="input-picker" @change="onSelect2" :value="index2" :range="select2">{{select2[index2]}}</picker>
+				<input class="input-val" type="digit" placeholder="请输入数据" v-model="value2" />
+				<view class="input-unit"><text>{{unit2}}</text></view>
 			</view>
 			<!-- 计算按钮 -->
-			<view class="calc"><button type="primary" @click="onCalc" :disabled="value1=='' || value2==''">计算</button></view>
+			<view class="calc">
+				<button type="primary" @click="onCalc" :disabled="value1=='' || value2==''">开始计算</button>
+			</view>
 		</view>
 		<!-- 输出容器，纵向排列 -->
 		<view class="result-content">
-			<view style="width: 100%; text-align: center; color: blue;">计算结果</view>
+			<label>计算结果：</label>
 			<!-- 输出表头，横向排列 -->
 			<view class="result-head">
-				<view class="result-head-text" style="width: 10%;">序号</view>
-				<view class="result-head-text" style="width: 30%;">参数</view>
-				<view class="result-head-text" style="width: 30%;">数值</view>
-				<view class="result-head-text" style="width: 30%;">单位</view>
+				<view class="result-head-text" style="width: 10%;"><text>序号</text></view>
+				<view class="result-head-text" style="width: 30%;"><text>参数</text></view>
+				<view class="result-head-text" style="width: 30%;"><text>数值</text></view>
+				<view class="result-head-text" style="width: 30%;"><text>单位</text></view>
 			</view>
 			<!-- 输出表项，横向排列 -->
 			<view class="result-item" v-for="(item, idx) in result" :key="idx">
-				<view class="result-item-text" style="width: 10%;">{{item.sn}}</view>
-				<view class="result-item-text" style="width: 30%;">{{item.arg}}</view>
-				<view class="result-item-text" style="width: 30%;">{{item.val}}</view>
-				<view class="result-item-text" style="width: 30%;">{{item.unit}}</view>
+				<view class="result-item-text" style="width: 10%;"><text>{{item.sn}}</text></view>
+				<view class="result-item-text" style="width: 30%;"><text>{{item.arg}}</text></view>
+				<view class="result-item-text" style="width: 30%;"><text>{{item.val}}</text></view>
+				<view class="result-item-text" style="width: 30%;"><text>{{item.unit}}</text></view>
 			</view>
 		</view>
 	</view>
@@ -156,88 +157,24 @@
 </script>
 
 <style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
-	}
-	.input-content {
-		display: flex;
-		flex-direction: row;
-		align-items: stretch;
-		margin-left: 5rpx;
-		margin-right: 5rpx;
-		margin-top: 5rpx;
-	}
-	
-	.input-area {
-		flex: 1 1 auto;
-	}
-	
-	.input-item {
-		display: flex;
-		flex-direction: row;
-	}
-	
-	.arg {
-		width: 100rpx;
-		margin-right: 5rpx;
-		background-color: lightgray;
-		padding-left: 5px;
-	}
-	
-	.val {
-		margin-right: 5rpx;
-		background-color: lightgreen;
-		flex: 1 1 auto;
-		padding-left: 5px;
-	}
-	
-	.unit {
-		width: 100rpx;
-		background-color: lightgray;
-		padding-left: 5px;
-	}
-	
-	.calc {
-		background-color: gray;
-		margin-left: 5rpx;
-		color: blue;
-	}
-	
-	.result-content {
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
+	.input-picker {
+		width: 180rpx;
+		padding-right: 5px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		text-align: right;
 	}
 	
 	.result-head {
 		display: flex;
 		flex-direction: row;
-		align-items: stretch;
-		justify-content: space-between;
-		color: red;
 		font-weight: bold;
+		color: blue;
 		text-align: center;
-		border: 1px solid lightgray;
-	}
-	
-	.result-head-text {
-		border-right: 1px solid lightgray;
-	}
-	
-	.result-item {
-		display: flex;
-		flex-direction: row;
-		align-items: stretch;
-		justify-content: space-between;
-		text-align: center;
-		border-bottom: 1px solid lightgray;
-		border-left: 1px solid lightgray;
-		border-right: 1px solid lightgray;
+		margin-top: 5px;
 	}
 	
 	.result-item-text {
-		border-right: 1px solid lightgray;
+		text-align: center;
 	}
 </style>

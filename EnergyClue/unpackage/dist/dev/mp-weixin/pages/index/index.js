@@ -145,8 +145,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 var _default =
 {
   data: function data() {
@@ -158,25 +156,24 @@ var _default =
         page: '/pages/if97/if97' },
 
       {
-        name: '凝汽器',
+        name: '凝汽器变工况',
         image: '/static/condenser.png',
-        page: '/pages/condenser/condenser' }] };
+        page: '/pages/condenser/condenser' },
+
+      {
+        name: '凝汽器清洁度',
+        image: '/static/logo.png',
+        page: '/pages/condenser/cleanliness' },
+
+      {
+        name: '关于',
+        image: '/static/about.png',
+        page: '/pages/about/about' }] };
 
 
 
   },
   onLoad: function onLoad() {
-    console.log("onLoad func");
-    try {
-      var res = uni.getSystemInfoSync();
-      var w = res.windowWidth / 2 - 20;
-      this.btnStyle = "width: ".concat(w, "px; height: ").concat(w, "px");
-      console.log(this.btnStyle);
-    } catch (e) {
-      // error
-      console.log("error");
-    }
-
   },
   methods: {
     goto: function goto(url) {

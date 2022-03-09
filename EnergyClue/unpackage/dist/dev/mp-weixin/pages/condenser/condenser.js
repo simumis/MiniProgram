@@ -128,31 +128,171 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var condenser = _interopRequireWildcard(__webpack_require__(/*! ./condenser.js */ 26));
+var _jif = __webpack_require__(/*! ../../common/jif97.js */ 27);function _getRequireWildcardCache() {if (typeof WeakMap !== "function") return null;var cache = new WeakMap();_getRequireWildcardCache = function _getRequireWildcardCache() {return cache;};return cache;}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;}if (obj === null || typeof obj !== "object" && typeof obj !== "function") {return { default: obj };}var cache = _getRequireWildcardCache();if (cache && cache.has(obj)) {return cache.get(obj);}var newObj = {};var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) {var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;if (desc && (desc.get || desc.set)) {Object.defineProperty(newObj, key, desc);} else {newObj[key] = obj[key];}}}newObj.default = obj;if (cache) {cache.set(obj, newObj);}return newObj;}function _createForOfIteratorHelper(o, allowArrayLike) {var it;if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = o[Symbol.iterator]();}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}var _default =
+
 {
   data: function data() {
     return {
-      style: 'color: red; font-size: 300rpx' };
+      input_text: [
+      { name: '凝汽器热负荷', value: '1100', default: '1100', unit: 'MW' },
+      { name: '冷却水入口温度', value: '20', default: '20', unit: '℃' },
+      { name: '冷却水流量', value: '25000', default: '25000', unit: 'kg/s' },
+      { name: '冷却水比热', value: '4.18', default: '4.18', unit: 'kJ/(kg·℃)' },
+      { name: '凝汽器换热面积', value: '54000', default: '54000', unit: '㎡' },
+      { name: '冷却管外径', value: '25', default: '25', unit: 'mm' },
+      { name: '冷却管壁厚', value: '0.5', default: '0.5', unit: 'mm' },
+      { name: '冷却管数量', value: '55000', default: '55000', unit: '根' },
+      { name: '流程数', value: '2', default: '2', unit: '' },
+      { name: '清洁系数', value: '0.85', default: '0.85', unit: '' },
+      { name: '冷却水密度', value: '1000', default: '1000', unit: 'kg/m³' }],
+
+      tube_materials: ['HSn70-1(锡黄铜)', 'HA177-2(铝黄铜)', 'BFe30-1-1(铁白铜)', 'BFe10-1-1(铁白铜)', '碳钢', 'TP304,TP316,TP317(不锈钢)', 'TA1,TA2(钛合金)'],
+      material_index: -1,
+      results: [
+      { name: '凝汽器饱和温度', value: '', unit: '℃' },
+      { name: '凝汽器饱和压力', value: '', unit: 'kPa' },
+      { name: '冷却水出口温度', value: '', unit: '℃' },
+      { name: '冷却水温升', value: '', unit: '℃' },
+      { name: '凝汽器端差', value: '', unit: '℃' }] };
+
 
   },
   onLoad: function onLoad() {
-    console.log("get in onLoad");
+    // 默认管材设为钛合金
+    this.material_index = this.tube_materials.length - 1;
   },
   methods: {
-    setupSelect: function setupSelect(obj) {
-      console.log("get in setupSelect");
-      console.log("obj: ", obj);
-      var btn = document.getElementById("btn");
-      var arg = document.getElementById("arg");
-      console.log("btn: ", btn);
-      console.log("arg: ", arg);
+    onMaterialSelect: function onMaterialSelect(e) {
+      var idx = e.target.value;
+      this.material_index = idx;
+    },
+    onCalc: function onCalc(e) {
+      var Q = parseFloat(this.input_text[0].value); // 凝汽器热负荷
+      var tw1 = parseFloat(this.input_text[1].value); // 冷却水入口温度
+      var Gw = parseFloat(this.input_text[2].value); // 冷却水流量
+      var cp = parseFloat(this.input_text[3].value); // 冷却水比热
+      var A = parseFloat(this.input_text[4].value); // 凝汽器换热面积
+      var d = parseFloat(this.input_text[5].value); // 冷却管外径
+      var m = parseFloat(this.input_text[6].value); // 冷却管壁厚
+      var n = parseFloat(this.input_text[7].value); // 冷却管数量
+      var fn = parseFloat(this.input_text[8].value); // 流程数
+      var bc = parseFloat(this.input_text[9].value); // 清洁系数
+      var rho = parseFloat(this.input_text[10].value); // 冷却水密度
+      // 
+      var v = condenser.velocity(Gw, d, m, n, fn, rho);
+      var K0;
+      try {
+        K0 = condenser.K0(d, v);
+      } catch (e) {
+        //TODO handle the exception
+        uni.showModal({
+          title: '警告',
+          content: e.message,
+          showCancel: false });
+
+        // 清除输出结果
+        var _iterator = _createForOfIteratorHelper(this.results),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var item = _step.value;
+            item.value = '';
+          }} catch (err) {_iterator.e(err);} finally {_iterator.f();}
+        return;
+      }
+
+      var bt = condenser.bt(tw1);
+      var bm = condenser.bm(this.material_index, m);
+      var K = condenser.K(K0, bt, bm, bc);
+      var ts = condenser.satTemperature(Q, tw1, Gw, cp, A, K);
+      var water = (0, _jif.setupTX)(ts, 1);
+      if (water == null) {
+        // 清除输出结果
+        var _iterator2 = _createForOfIteratorHelper(this.results),_step2;try {for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {var _item = _step2.value;
+            _item.value = '';
+          }} catch (err) {_iterator2.e(err);} finally {_iterator2.f();}
+        uni.showModal({
+          title: '警告',
+          content: '请检查输入数据是否在有效范围。',
+          showCancel: false });
+
+        return;
+      }
+      var ps = water.p / 1000; // 饱和压力
+      var tw2 = condenser.tw2(Q, tw1, Gw, cp); // 冷却水出口温度
+      var dt = tw2 - tw1; // 冷却水温升
+      var delta = ts - tw2; // 凝汽器端差
+
+      // 输出结果
+      this.results[0].value = ts.toPrecision(4);
+      this.results[1].value = ps.toPrecision(4);
+      this.results[2].value = tw2.toPrecision(4);
+      this.results[3].value = dt.toPrecision(4);
+      this.results[4].value = delta.toPrecision(4);
+
+    },
+    onReset: function onReset(e) {var _iterator3 = _createForOfIteratorHelper(
+      this.input_text),_step3;try {for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {var item = _step3.value;
+          item.value = item.default;
+        }
+        // 默认管材设为钛合金
+      } catch (err) {_iterator3.e(err);} finally {_iterator3.f();}this.material_index = this.tube_materials.length - 1;
+      // 清除输出结果
+      var _iterator4 = _createForOfIteratorHelper(this.results),_step4;try {for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {var _item2 = _step4.value;
+          _item2.value = '';
+        }} catch (err) {_iterator4.e(err);} finally {_iterator4.f();}
+    },
+    onClear: function onClear(e) {var _iterator5 = _createForOfIteratorHelper(
+      this.input_text),_step5;try {for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {var item = _step5.value;
+          item.value = '';
+        }
+        // 清除输出结果
+      } catch (err) {_iterator5.e(err);} finally {_iterator5.f();}var _iterator6 = _createForOfIteratorHelper(this.results),_step6;try {for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {var _item3 = _step6.value;
+          _item3.value = '';
+        }} catch (err) {_iterator6.e(err);} finally {_iterator6.f();}
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 

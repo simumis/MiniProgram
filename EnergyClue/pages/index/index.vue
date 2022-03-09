@@ -1,10 +1,8 @@
 <template>
-	<view>
-		<view class="utils">
-			<view class="utils-item" v-for="(item, idx) in utils" :key=idx @click="goto(item.page)">
-				<image class="utils-item-img" :src="item.image"></image>
-				<view class="utils-item-text">{{item.name}}</view>
-			</view>
+	<view class="content">
+		<view class="utils-item" v-for="(item, idx) in utils" :key=idx @click="goto(item.page)">
+			<image class="utils-item-img" :src="item.image"></image>
+			<text class="utils-item-text">{{item.name}}</text>
 		</view>
 	</view>
 </template>
@@ -20,9 +18,14 @@
 						page: '/pages/if97/if97'
 					},
 					{
-						name: '凝汽器',
+						name: '凝汽器变工况',
 						image: '/static/condenser.png',
 						page: '/pages/condenser/condenser'
+					},
+					{
+						name: '凝汽器清洁度',
+						image: '/static/logo.png',
+						page: '/pages/condenser/cleanliness'
 					},
 					{
 						name: '关于',
@@ -33,17 +36,6 @@
 			}
 		},
 		onLoad() {
-			console.log("onLoad func");
-			try {
-				const res = uni.getSystemInfoSync();
-				var w = res.windowWidth/2-20;
-				this.btnStyle = `width: ${w}px; height: ${w}px`;
-				console.log(this.btnStyle)
-			} catch (e) {
-				// error
-				console.log("error");
-			}
-
 		},
 		methods: {
 			goto(url) {
@@ -56,7 +48,7 @@
 </script>
 
 <style>
-	.utils {
+	.content {
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
