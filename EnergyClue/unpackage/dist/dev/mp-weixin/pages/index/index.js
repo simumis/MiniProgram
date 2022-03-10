@@ -162,7 +162,7 @@ var _default =
 
       {
         name: '凝汽器清洁度',
-        image: '/static/logo.png',
+        image: '/static/clean.png',
         page: '/pages/condenser/cleanliness' },
 
       {

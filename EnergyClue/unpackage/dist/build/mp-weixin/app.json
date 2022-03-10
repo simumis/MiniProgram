@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/condenser/condenser",
+    "pages/condenser/cleanliness",
+    "pages/if97/if97",
+    "pages/about/about"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "EnergyClue",
+    "navigationBarBackgroundColor": "#007AFF",
+    "backgroundColor": "#0000FF"
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,1 @@
+<view class="content"><label>关于软件：</label><view class="notes"><view wx:for="{{a}}" wx:for-item="item" class="notes-item"><text user-select="true" selectable="true">{{item.a}}</text></view><view class="version"><view>版本：</view><view>{{b}}</view></view></view></view>

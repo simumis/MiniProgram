@@ -175,56 +175,56 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var jif97 = _interopRequireWildcard(__webpack_require__(/*! ../../common/jif97.js */ 27));function _getRequireWildcardCache() {if (typeof WeakMap !== "function") return null;var cache = new WeakMap();_getRequireWildcardCache = function _getRequireWildcardCache() {return cache;};return cache;}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;}if (obj === null || typeof obj !== "object" && typeof obj !== "function") {return { default: obj };}var cache = _getRequireWildcardCache();if (cache && cache.has(obj)) {return cache.get(obj);}var newObj = {};var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) {var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;if (desc && (desc.get || desc.set)) {Object.defineProperty(newObj, key, desc);} else {newObj[key] = obj[key];}}}newObj.default = obj;if (cache) {cache.set(obj, newObj);}return newObj;} //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = { data: function data() {return { select1: ["p-压力", "t-温度", "h-比焓"], index1: 0, select1_name: ['p', 't', 'h'], unit1: 'MPa', select2: ["t-温度", "h-比焓", "s-比熵", "x-干度"], index2: 0, select2_name: ['t', 'h', 's', 'x'], unit2: '℃', value1: '', value2: '', result: [{ sn: '0', arg: '分区', val: '', unit: '-' }, { sn: '1', arg: '压力', val: '', unit: 'MPa' }, { sn: '2', arg: '温度', val: '', unit: '℃' }, { sn: '3', arg: '比容', val: '', unit: 'm³/kg' }, { sn: '4', arg: '内能', val: '', unit: 'kJ/kg' }, { sn: '5', arg: '比焓', val: '', unit: 'kJ/kg' }, { sn: '6', arg: '比熵', val: '', unit: 'kJ/(kg·℃)' }, { sn: '7', arg: '定容比热', val: '', unit: 'kJ/(kg·℃)' }, { sn: '8', arg: '定压比热', val: '', unit: 'kJ/(kg·℃)' }, { sn: '9', arg: '声速', val: '', unit: 'm/s' }, { sn: '10', arg: '干度', val: '', unit: 'kg/kg' }] };}, onLoad: function onLoad() {}, methods: { //响应第一参数选项改变事件
+var jif97 = _interopRequireWildcard(__webpack_require__(/*! ../../common/jif97.js */ 27));function _getRequireWildcardCache() {if (typeof WeakMap !== "function") return null;var cache = new WeakMap();_getRequireWildcardCache = function _getRequireWildcardCache() {return cache;};return cache;}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;}if (obj === null || typeof obj !== "object" && typeof obj !== "function") {return { default: obj };}var cache = _getRequireWildcardCache();if (cache && cache.has(obj)) {return cache.get(obj);}var newObj = {};var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) {var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;if (desc && (desc.get || desc.set)) {Object.defineProperty(newObj, key, desc);} else {newObj[key] = obj[key];}}}newObj.default = obj;if (cache) {cache.set(obj, newObj);}return newObj;}function _createForOfIteratorHelper(o, allowArrayLike) {var it;if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = o[Symbol.iterator]();}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}var _default =
+{
+  data: function data() {
+    return {
+      select1: ["p-压力", "t-温度", "h-比焓"],
+      index1: 0,
+      select1_name: ['p', 't', 'h'],
+      unit1: 'MPa',
+      select2: ["t-温度", "h-比焓", "s-比熵", "x-干度"],
+      index2: 0,
+      select2_name: ['t', 'h', 's', 'x'],
+      unit2: '℃',
+      value1: '',
+      value2: '',
+      results: [
+      { sn: '0', arg: '分区', val: '', unit: '-' },
+      { sn: '1', arg: '压力', val: '', unit: 'MPa' },
+      { sn: '2', arg: '温度', val: '', unit: '℃' },
+      { sn: '3', arg: '比容', val: '', unit: 'm³/kg' },
+      { sn: '4', arg: '内能', val: '', unit: 'kJ/kg' },
+      { sn: '5', arg: '比焓', val: '', unit: 'kJ/kg' },
+      { sn: '6', arg: '比熵', val: '', unit: 'kJ/(kg·℃)' },
+      { sn: '7', arg: '定容比热', val: '', unit: 'kJ/(kg·℃)' },
+      { sn: '8', arg: '定压比热', val: '', unit: 'kJ/(kg·℃)' },
+      { sn: '9', arg: '声速', val: '', unit: 'm/s' },
+      { sn: '10', arg: '干度', val: '', unit: 'kg/kg' }] };
+
+
+  },
+
+  onLoad: function onLoad() {
+
+  },
+
+  methods: {
+    //响应第一参数选项改变事件
     //设置参数单位和第二参数选项列表
-    onSelect1: function onSelect1(e) {var idx = e.target.value;if (idx == this.index1) {return;}this.index1 = idx;this.unit1 = ["MPa", "℃", "kJ/kg"][idx]; // 设置参数2选项
+    onSelect1: function onSelect1(e) {
+      var idx = e.target.value;
+      if (idx == this.index1) {
+        return;
+      }
+      this.index1 = idx;
+      this.unit1 = ["MPa", "℃", "kJ/kg"][idx];
+      // 设置参数2选项
       this.index2 = 0; // 默认选中参数2列表第一项
       if (idx == 0) {// p
-        this.select2 = ["t-温度", "h-比焓", "s-比熵", "x-干度"];this.select2_name = ['t', 'h', 's', 'x'];this.unit2 = ["℃", "kJ/kg", "kJ/(kg·℃)", "kg/kg"][0];
+        this.select2 = ["t-温度", "h-比焓", "s-比熵", "x-干度"];
+        this.select2_name = ['t', 'h', 's', 'x'];
+        this.unit2 = ["℃", "kJ/kg", "kJ/(kg·℃)", "kg/kg"][0];
       } else if (idx == 1) {// t
         this.select2 = ["x-干度"];
         this.select2_name = ['x'];
@@ -264,15 +264,20 @@ var _default = { data: function data() {return { select1: ["p-压力", "t-温度
       var val2 = parseFloat(this.value2);
       var w = jif97.props(arg1, val1, arg2, val2);
       if (w == null) {
+        // 清除计算结果
+        var _iterator = _createForOfIteratorHelper(this.results),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var item = _step.value;
+            item.val = '';
+          }} catch (err) {_iterator.e(err);} finally {_iterator.f();}
         uni.showModal({
           title: '警告',
           content: '请检查输入数据是否在有效范围。',
           showCancel: false });
 
+        return;
       }
       var res = ["rgn", "p", "t", "v", "u", "h", "s", "cv", "cp", "w", "x"];
-      this.result[0].val = w.rgn;
-      for (var i = 1; i < this.result.length; i++) {
+      this.results[0].val = w.rgn;
+      for (var i = 1; i < this.results.length; i++) {
         var dat = w[res[i]];
         if (res[i] == 'p') {
           dat /= 1.0E6;
@@ -281,7 +286,7 @@ var _default = { data: function data() {return { select1: ["p-压力", "t-温度
         } else if (res[i] == "u" || res[i] == "h" || res[i] == "s" || res[i] == "cv" || res[i] == "cp") {
           dat /= 1.0E3;
         }
-        this.result[i].val = dat.toPrecision(6);
+        this.results[i].val = dat.toPrecision(6);
       }
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

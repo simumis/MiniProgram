@@ -1,8 +1,15 @@
 <template>
+	<!-- 首页放置导航按钮，每行并排放两个 -->
 	<view class="content">
-		<view class="utils-item" v-for="(item, idx) in utils" :key=idx @click="goto(item.page)">
-			<image class="utils-item-img" :src="item.image"></image>
-			<text class="utils-item-text">{{item.name}}</text>
+		<view class="utils-panel" v-for="(item, idx) in utils" :key=idx>
+			<view class="utils-item" @click="goto(item.left.page)">
+				<image class="utils-item-img" :src="item.left.image"></image>
+				<text class="utils-item-text">{{item.left.name}}</text>
+			</view>
+			<view class="utils-item" @click="goto(item.right.page)">
+				<image class="utils-item-img" :src="item.right.image"></image>
+				<text class="utils-item-text">{{item.right.name}}</text>
+			</view>
 		</view>
 	</view>
 </template>
@@ -13,24 +20,28 @@
 			return {
 				utils: [
 					{
-						name: '水蒸汽性质',
-						image: '/static/steam.png',
-						page: '/pages/if97/if97'
+						left: {
+							name: '水蒸汽性质',
+							image: '/static/steam.png',
+							page: '/pages/if97/if97'
+						},
+						right: {
+							name: '凝汽器变工况',
+							image: '/static/condenser.png',
+							page: '/pages/condenser/condenser'
+						}
 					},
 					{
-						name: '凝汽器变工况',
-						image: '/static/condenser.png',
-						page: '/pages/condenser/condenser'
-					},
-					{
-						name: '凝汽器清洁度',
-						image: '/static/logo.png',
-						page: '/pages/condenser/cleanliness'
-					},
-					{
-						name: '关于',
-						image: '/static/about.png',
-						page: '/pages/about/about'
+						left: {
+							name: '凝汽器清洁度',
+							image: '/static/clean.png',
+							page: '/pages/condenser/cleanliness'
+						},
+						right: {
+							name: '关于',
+							image: '/static/about.png',
+							page: '/pages/about/about'
+						}
 					}
 				],
 			}
@@ -48,25 +59,23 @@
 </script>
 
 <style>
-	.content {
+	.utils-panel {
 		display: flex;
 		flex-direction: row;
-		flex-wrap: wrap;
-		align-items: center;
-		justify-content: flex-start;
+		align-items: stretch;
+		justify-content: center;
 	}
-		
+	
 	.utils-item {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		background-color: lightgray;
 		width: 300rpx;
 		height: 300rpx;
-		margin: 5px;
+		margin: 10px;
+		border: 2px solid blue;
 	}
-	
 	.utils-item-img {
 		width: 200rpx;
 		height: 200rpx;

@@ -14,19 +14,20 @@
 
 <style>
 	/*每个页面公共css */
+	page {
+		background-color: lightgrey;
+	}
 	.content {
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		justify-content: space-between;
-		width: 100%;
-		background-color: lightgray;
+		justify-content: flex-start;
 	}
 	
 	label {
 		color: red;
 		font-weight: bold;
-		background-color: lightgray;
+		font-size: larger;
 		width: 100%;
 		padding-left: 5px;
 	}
@@ -59,24 +60,23 @@
 	.input-name, .result-name {
 		text-align: right;
 		width: 300rpx;
-		background-color: lightgray;
 		padding-right: 5px;
 		padding-top: 5px;
 		padding-bottom: 5px;
 	}
 	
 	.input-val, .result-val {
-		background-color: lightcyan;
+		background-color: WhiteSmoke;
 		flex: 1 1 auto;
 		padding-left: 5px;
 		padding-top: 5px;
 		padding-bottom: 5px;
 		text-align: center;
+		margin-left: 5px;
 	}
 	
 	.input-unit, .result-unit {
 		width: 200rpx;
-		background-color: lightgray;
 		padding-left: 5px;
 		padding-top: 5px;
 		padding-bottom: 5px;
@@ -85,6 +85,7 @@
 	.picker-content {
 		display: flex;
 		flex-direction: row;
+		margin-top: 5px;
 	}
 	.picker-hint {
 		text-align: right;
@@ -95,11 +96,14 @@
 		padding-bottom: 5px;
 	}
 	.picker-item {
-		background-color: lightpink;
+		background-color: silver;
+		color: blue;
 		flex: 1 1 auto;
 		text-align: center;
 		padding-top: 5px;
 		padding-bottom: 5px;
+		margin-right: 5px;
+		border: 1px solid red;
 	}
 	
 	.notes {
@@ -108,4 +112,7 @@
 		padding-bottom: 10px;
 	}
 	
+	.mark-triangle{
+		color: red;
+	}
 </style>

@@ -11,7 +11,7 @@
 			</view>
 			<view class="picker-content">
 				<view class="picker-hint"><text>请选择冷却管材料：</text></view>
-				<picker class="picker-item" @change="onMaterialSelect" :value="material_index" :range="tube_materials">{{tube_materials[material_index]}}</picker>
+				<picker class="picker-item" @change="onMaterialSelect" :value="material_index" :range="tube_materials">{{tube_materials[material_index]}} <text class="mark-triangle">&#9660</text></picker>
 			</view>
 		</view>
 		<!-- 按钮 -->
@@ -34,10 +34,9 @@
 			</view>
 		</view>
 		<label>相关说明：</label>
-		<text class="notes">
-			1、本程序依据《凝汽器与真空系统运行维护导则》(DL/T 932-2019)所列方法编制。
-			2、本程序根据标准公式计算凝汽器变工况特性，未对特定凝汽器进行校核，计算结果仅供参考。
-		</text>
+		<view class="notes">
+			<view class="notes-item" v-for="item in notes"><text>{{item}}</text></view>
+		</view>
 	</view>
 </template>
 
@@ -70,6 +69,10 @@ export default {
 		  {name:'冷却水温升', value:'', unit:'℃'},
 		  {name:'凝汽器端差', value:'', unit:'℃'}
 	  ],
+	  notes: [
+		  '1、本程序依据《凝汽器与真空系统运行维护导则》(DL/T 932-2019)所列方法编制。',
+		  '2、本程序根据标准公式计算凝汽器变工况特性，未对特定凝汽器进行校核，计算结果仅供参考。'
+	  ]
     }
   },
   onLoad() {
@@ -78,7 +81,7 @@ export default {
   },
   methods: {
 	 onMaterialSelect: function(e) {
-		 let idx = e.target.value;
+		 let idx = e.detail.value;
 		 this.material_index = idx;
 	 },
 	 onCalc: function (e) {

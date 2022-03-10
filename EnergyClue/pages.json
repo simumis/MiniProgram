@@ -10,7 +10,7 @@
             "path" : "pages/condenser/condenser",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "凝汽器变工况计算",
+                "navigationBarTitleText": "凝汽器变工况",
                 "enablePullDownRefresh": false
             }
             
@@ -28,7 +28,7 @@
             "path" : "pages/if97/if97",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "水和水蒸气热力性质计算",
+                "navigationBarTitleText": "水和水蒸气热力性质",
                 "enablePullDownRefresh": false
             }
             
