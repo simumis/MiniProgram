@@ -40,10 +40,23 @@
 		padding-left: 5px;
 		padding-right: 5px;
 	}
-	.calc button {
+	.calc-button {
 		flex: 1 1 auto;
 		margin-left: 2px;
 		margin-right: 2px;
+		font-weight: bold;
+	}
+	.calc-button-clear {
+		background-color: red;
+	}
+	.calc-button-reset {
+		background-color: yellow;
+	}
+	.calc-button-clear-hover {
+		background-color: FireBrick;
+	}
+	.calc-button-reset-hover {
+		background-color: Gold;
 	}
 	
 	.input-content, .result-content {
