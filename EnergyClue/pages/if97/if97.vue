@@ -18,7 +18,7 @@
 			</view>
 			<!-- 计算按钮 -->
 			<view class="calc">
-				<button type="primary" @click="onCalc" :disabled="value1=='' || value2==''">开始计算</button>
+				<button class="calc-button" type="primary" @click="onCalc" :disabled="value1=='' || value2==''">开始计算</button>
 			</view>
 		</view>
 		<!-- 输出容器，纵向排列 -->
