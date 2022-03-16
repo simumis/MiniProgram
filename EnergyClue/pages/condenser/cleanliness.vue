@@ -215,6 +215,8 @@ export default {
 			for(let item of this.results) {
 				item.value = '';
 			}
+			// 清空缓存的数据
+			uni.removeStorageSync(this.storageKey);
 		},
 		onClear: function(e) {
 			for(let item of this.input_text) {
