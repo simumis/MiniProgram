@@ -121,7 +121,7 @@
 			//响应第一参数选项改变事件
 			//设置参数单位和第二参数选项列表
 			onSelect1: function(event) {
-				let idx = evente.detail.value;
+				let idx = event.detail.value;
 				if(idx == this.index1) {
 					return;
 				}
