@@ -67,7 +67,7 @@ export default {
 				{name:'冷却水温升', value:'', unit:'℃'},
 				{name:'凝汽器端差', value:'', unit:'℃'}
 			],
-				storageKey: '__condenser_input',
+			storageKey: '__condenser_input',
 			notes: [
 		  '1、本程序依据《凝汽器与真空系统运行维护导则》(DL/T 932-2019)所列方法编制。',
 		  '2、本程序根据标准公式计算凝汽器变工况特性，未对特定凝汽器进行校核，计算结果仅供参考。'
