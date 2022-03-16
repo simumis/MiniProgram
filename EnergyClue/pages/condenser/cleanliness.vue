@@ -71,6 +71,7 @@ export default {
 				{name:'凝汽器清洁系数', value:'', unit:''},
 				{name:'凝汽器清洁度', value:'', unit:'%'}
 			],
+			storageKey: '__cleanliness_input',
 			notes: [
 				'1、本程序依据《凝汽器与真空系统运行维护导则》(DL/T 932-2019)所列方法编制。',
 				'2、本程序根据标准公式计算凝汽器变工况特性，未对特定凝汽器进行校核，计算结果仅供参考。',
@@ -79,8 +80,23 @@ export default {
 		}
 	},
 	onLoad() {
-		// 默认管材设为钛合金
-		this.material_index = this.tube_materials.length - 1;
+		// 装载缓存的数据
+		try{
+			let dat = uni.getStorageSync(this.storageKey);
+			if(dat && (dat.length == this.input_text.length+1)) {
+				this.material_index = parseInt(dat[0])
+				for(let i=0; i<this.input_text.length; i++) {
+					this.input_text[i].value = dat[i+1];
+				}
+				this.implCalc();
+			} else {
+				// 默认管材设为钛合金
+				this.material_index = this.tube_materials.length - 1;
+			}
+		}catch(e){
+			//TODO handle the exception
+			console.log(e.message);
+		}
 	},
 	computed: {
 		isReady: function() {
@@ -103,7 +119,7 @@ export default {
 			let idx = e.detail.value;
 			this.material_index = idx;
 		},
-		onCalc: function (e) {
+		implCalc: function() {
 			let ps = parseFloat(this.input_text[1].value) // 凝汽器压力
 			let tw1 = parseFloat(this.input_text[2].value); // 冷却水入口温度
 			let tw2 = parseFloat(this.input_text[3].value); // 冷却水出口温度
@@ -140,7 +156,7 @@ export default {
 				for(let item of this.results) {
 					item.value = '';
 				}
-				return;
+				return false;
 			}
 			// 计算凝汽器饱和温度
 			let water = setupPX(ps/1000, 1);
@@ -154,7 +170,7 @@ export default {
 					content: '请检查输入数据是否在有效范围。',
 					showCancel: false
 				});
-				return;
+				return false;
 			}
 			let ts = water.t - 273.15; 
 			let bt = condenser.bt(tw1);
@@ -170,6 +186,24 @@ export default {
 			this.results[2].value = delta.toPrecision(4);
 			this.results[3].value = bc.toPrecision(4);
 			this.results[4].value = cl.toPrecision(4);
+			// 返回成功
+			return true;
+		},
+		onCalc: function (e) {
+			let ok = this.implCalc();
+			if(ok) {
+				// 保存输入参数
+				let dat = [this.material_index.toString()];
+				for(const item of this.input_text) {
+					dat.push(item.value);
+				}
+				try{
+					uni.setStorageSync(this.storageKey, dat);
+				}catch(e){
+					//TODO handle the exception
+					console.log('无法保存输入数据-cleanliness');
+				}
+			}
 		},
 		onReset: function(e) {
 			for(let item of this.input_text) {
@@ -190,6 +224,8 @@ export default {
 			for(let item of this.results) {
 				item.value = '';
 			}
+			// 清空缓存的数据
+			uni.removeStorageSync(this.storageKey);
 		}
 	}
 }

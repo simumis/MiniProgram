@@ -109,7 +109,6 @@
 					this.value1 = dat[1];
 					this.index2 = parseInt(dat[2]);
 					this.value2 = dat[3];
-					console.log(dat);
 					this.implCalc();
 				}
 			}catch(e){
@@ -121,8 +120,8 @@
 		methods: {
 			//响应第一参数选项改变事件
 			//设置参数单位和第二参数选项列表
-			onSelect1: function(e) {
-				let idx = e.detail.value;
+			onSelect1: function(event) {
+				let idx = evente.detail.value;
 				if(idx == this.index1) {
 					return;
 				}
@@ -133,8 +132,8 @@
 			//响应第二参数选项改变事件
 			//设置参数单位
 			//arg2为第二参数代码，如"t","h","s","x"
-			onSelect2: function(e) {
-			    let idx = e.detail.value;
+			onSelect2: function(event) {
+			    let idx = event.detail.value;
 				if(idx == this.index2) {
 					return;
 				}
@@ -156,7 +155,7 @@
 						content: '请检查输入数据是否在有效范围。',
 						showCancel: false
 					});
-					return;
+					return false;
 				}
 				let res = ["rgn","p" ,"t", "v", "d", "u", "h", "s", "cv", "cp", "w", "x"];
 				this.results[0].val = w.rgn;
@@ -176,21 +175,24 @@
 					}
 					this.results[i].val = dat.toPrecision(6);
 				}
+				return true;
 			},
-			onCalc: function() {
+			onCalc: function(event) {
 				// 执行计算
-				this.implCalc();
-				// 保存输入参数
-				let dat = ['', '', '', '']; // [index1, value1, index2, value2]
-				dat[0] = this.index1.toString();
-				dat[1] = this.value1;
-				dat[2] = this.index2.toString();
-				dat[3] = this.value2;
-				try{
-					uni.setStorageSync(this.storageKey, dat);
-				}catch(e){
-					//TODO handle the exception
-					console.log('无法保存输入数据-if97');
+				let ok = this.implCalc();
+				if(ok) {
+					// 保存输入参数
+					let dat = ['', '', '', '']; // [index1, value1, index2, value2]
+					dat[0] = this.index1.toString();
+					dat[1] = this.value1;
+					dat[2] = this.index2.toString();
+					dat[3] = this.value2;
+					try{
+						uni.setStorageSync(this.storageKey, dat);
+					}catch(e){
+						//TODO handle the exception
+						console.log('无法保存输入数据-if97');
+					}
 				}
 			},
 			onClear: function () {
