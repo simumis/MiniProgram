@@ -16,9 +16,7 @@
 		</view>
 		<!-- 按钮 -->
 		<view class="calc">
-			<button class="calc-button" type="primary" @click="onCalc" :disabled="!isReady">
-				开始计算
-			</button>
+			<button class="calc-button" type="primary" @click="onCalc" :disabled="!isReady">开始计算</button>
 			<button class="calc-button calc-button-clear" hover-class="calc-button calc-button-clear-hover" @click="onClear">清除输入</button>
 			<button class="calc-button calc-button-reset" hover-class="calc-button calc-button-reset-hover" @click="onReset">恢复默认</button>
 		</view>
