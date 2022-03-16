@@ -1,1 +1,0 @@
-.utils-panel{display:flex;flex-direction:row;align-items:stretch;justify-content:center}.utils-item{display:flex;flex-direction:column;align-items:center;justify-content:center;width:300rpx;height:300rpx;margin:10px;border:2px solid blue}.utils-item-img{width:200rpx;height:200rpx}.utils-item-text{margin-top:2px;color:#00f}
