@@ -19,7 +19,7 @@
 			<!-- 计算按钮 -->
 			<view class="calc">
 				<button class="calc-button" type="primary" @click="onCalc" :disabled="value1=='' || value2==''">开始计算</button>
-			<button class="calc-button calc-button-clear" hover-class="calc-button calc-button-clear-hover" @click="onClear">清除输入</button>
+				<button class="calc-button calc-button-clear" @click="onClear">清除输入</button>
 			</view>
 		</view>
 		<!-- 输出容器，纵向排列 -->

@@ -35,6 +35,8 @@
 	.calc {
 		display: flex;
 		flex-direction: row;
+		align-items: stretch;
+		justify-content: space-between;
 		margin-top: 10px;
 		margin-bottom: 10px;
 		padding-left: 5px;
@@ -46,11 +48,18 @@
 		margin-right: 2px;
 		font-weight: bold;
 	}
+	
+	.calc-button-main {
+		background-color: lime;
+	}
 	.calc-button-clear {
 		background-color: red;
 	}
 	.calc-button-reset {
 		background-color: yellow;
+	}
+	.calc-button-main-hover {
+		background-color: green;
 	}
 	.calc-button-clear-hover {
 		background-color: FireBrick;
