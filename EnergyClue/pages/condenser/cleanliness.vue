@@ -173,7 +173,23 @@ export default {
 			let ts = water.t - 273.15; 
 			let bt = condenser.bt(tw1);
 			let bm = condenser.bm(this.material_index, m);
-			let bc = condenser.cleanliness(Q, tw1, tw2, ts, A, K0, bt, bm);
+			let bc;
+			try{
+				bc = condenser.cleanliness(Q, tw1, tw2, ts, A, K0, bt, bm);
+			}catch(e){
+				//TODO handle the exception
+				uni.showModal({
+					title: '警告',
+					content: e.message,
+					showCancel: false
+				});
+				// 清除输出结果
+				for(let item of this.results) {
+					item.value = '';
+				}
+				return false;
+			}
+			
 			let dt = tw2 - tw1; // 冷却水温升
 			let delta = ts - tw2; // 凝汽器端差
 			let cl = bc / bc0 * 100; // 凝汽器清洁度
