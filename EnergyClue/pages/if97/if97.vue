@@ -43,7 +43,7 @@
 		<!-- 说明部分 -->
 		<label>相关说明：</label>
 		<view class="notes">
-			<view class="notes-item" v-for="item in notes"><text>{{item}}</text></view>
+			<view class="notes-item" v-for="(item, idx) in notes" :key="idx"><text>{{item}}</text></view>
 		</view>
 	</view>
 </template>
