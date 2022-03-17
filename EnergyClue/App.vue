@@ -42,7 +42,9 @@
 		padding-left: 5px;
 		padding-right: 5px;
 	}
-	.calc-button {
+	.calc-button-main, .calc-button-clear, .calc-button-reset,
+	 .calc-button-main-hover, .calc-button-clear-hover,
+	 .calc-button-reset-hover {
 		flex: 1 1 auto;
 		margin-left: 2px;
 		margin-right: 2px;
@@ -50,19 +52,19 @@
 	}
 	
 	.calc-button-main {
-		background-color: lime;
-	}
-	.calc-button-clear {
-		background-color: red;
-	}
-	.calc-button-reset {
-		background-color: yellow;
+		background-color: ForestGreen;
 	}
 	.calc-button-main-hover {
 		background-color: green;
 	}
+	.calc-button-clear {
+		background-color: red;
+	}
 	.calc-button-clear-hover {
 		background-color: FireBrick;
+	}
+	.calc-button-reset {
+		background-color: yellow;
 	}
 	.calc-button-reset-hover {
 		background-color: Gold;
