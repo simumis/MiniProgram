@@ -50,7 +50,7 @@ export default {
 				{name:'冷却水入口温度', value:'20', default:'20', unit:'℃'},
 				{name:'冷却水流量', value:'25000', default:'25000', unit:'kg/s'},
 				{name:'冷却水比热', value:'4.18', default:'4.18', unit:'kJ/(kg·℃)'},
-				{name:'凝汽器换热面积', value:'54000', default:'54000', unit:'㎡'},
+				{name:'凝汽器换热面积', value:'54000', default:'54000', unit:'m²'},
 				{name:'冷却管外径', value:'25', default:'25', unit:'mm'},
 				{name:'冷却管壁厚', value:'0.5', default:'0.5', unit:'mm'},
 				{name:'冷却管数量', value:'55000', default:'55000', unit:'根'},
