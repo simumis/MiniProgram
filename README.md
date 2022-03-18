@@ -12,6 +12,9 @@ uni-app 是一个使用 Vue.js 开发所有前端应用的框架，开发者编�
 ### v0.1.1
 为if97、condenser 和 cleanliness 添加缓存页面状态功能，重新进入页面时能恢复上次正确计算时的状态。
 
+### v0.1.2
+增加小程序启动时检查更新功能。
+
 ## 小程序码
 ### 微信
 ![EnergyClue](images/gh_785b42133d7c_344.jpg "EnergyClue 微信小程序")
