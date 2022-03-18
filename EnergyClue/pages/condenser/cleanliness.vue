@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import * as condenser from './condenser.js'
+import * as dlt932 from '../../common/dlt932.js'
 import {Water, setupPX} from '../../common/jif97.js'
 
 export default {
@@ -139,10 +139,10 @@ export default {
 				Q = Gw * cp * (tw2 - tw1) / 1000;
 			}
 			// 
-			let v = condenser.velocity(Gw, d, m, n, fn, rho);
+			let v = dlt932.velocity(Gw, d, m, n, fn, rho);
 			let K0;
 			try{
-				K0 = condenser.K0(d, v);
+				K0 = dlt932.K0(d, v);
 			}catch(e){
 				//TODO handle the exception
 				uni.showModal({
@@ -171,11 +171,11 @@ export default {
 				return false;
 			}
 			let ts = water.t - 273.15; 
-			let bt = condenser.bt(tw1);
-			let bm = condenser.bm(this.material_index, m);
+			let bt = dlt932.bt(tw1);
+			let bm = dlt932.bm(this.material_index, m);
 			let bc;
 			try{
-				bc = condenser.cleanliness(Q, tw1, tw2, ts, A, K0, bt, bm);
+				bc = dlt932.cleanliness(Q, tw1, tw2, ts, A, K0, bt, bm);
 			}catch(e){
 				//TODO handle the exception
 				uni.showModal({
