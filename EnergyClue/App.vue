@@ -19,13 +19,12 @@
 		methods: {
 			autoUpdate: function() {
 				console.log(new Date());
-				let self = this;
-				// 获取小程序更新机制兼容
 				if(uni.canIUse('getUpdateManager')) {
+					console.log('getUpdateManager 可用');
 					const um = uni.getUpdateManager();
-					//1. 检查小程序是否有新版本发布
+					//检查版本更新信息
 					um.onCheckForUpdate(function(res){
-						// 请求完新版本信息的回调
+						// 有更新
 						if(res.hasUpdate) {
 							//2. 小程序有新版本，则静默下载新版本，做好更新准备
 							um.onUpdateReady(function(){
@@ -33,7 +32,7 @@
 								uni.showModal({
 									title: '更新提示',
 									content: '新版本已经准备好，是否重启应用？',
-									success:function(res){
+									success: function(res){
 										if(res.confirm) {
 											//3. 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
 											um.applyUpdate();
@@ -52,6 +51,9 @@
 						} //if(res.hasUpdate)
 					}); //onCheckForUpdate
 				} //if(uni.canIUse('getUpdateManager'))
+				else {
+					console.log('getUpdateManager 不可用');
+				}
 			} //autoUpdate
 		} //methods
 	}
