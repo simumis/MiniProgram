@@ -121,7 +121,7 @@
 			//响应第一参数选项改变事件
 			//设置参数单位和第二参数选项列表
 			onSelect1: function(event) {
-				let idx = event.detail.value;
+				let idx = parseInt(event.detail.value);
 				if(idx == this.index1) {
 					return;
 				}
@@ -133,7 +133,7 @@
 			//设置参数单位
 			//arg2为第二参数代码，如"t","h","s","x"
 			onSelect2: function(event) {
-			    let idx = event.detail.value;
+			    let idx = parseInt(event.detail.value);console.log(typeof idx)
 				if(idx == this.index2) {
 					return;
 				}

@@ -25,7 +25,7 @@
 						},
 						right: {
 							name: '湿空气性质',
-							image: '/static/logo.png',
+							image: '/static/air.png',
 							page: '/pages/humid/humid'
 						}
 					},

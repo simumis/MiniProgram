@@ -113,8 +113,8 @@ export default {
 		}
 	},
 	methods: {
-		onMaterialSelect: function(e) {
-			let idx = e.detail.value;
+		onMaterialSelect: function(event) {
+			let idx = parseInt(event.detail.value);
 			this.material_index = idx;
 		},
 		implCalc: function() {

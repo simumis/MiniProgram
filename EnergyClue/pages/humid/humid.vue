@@ -94,9 +94,9 @@ import * as air from '../../common/air.js';
 				],
 				storageKey: '__humid_input',
 				notes: [
-					'1、本程序依据《凝汽器与真空系统运行维护导则》(DL/T 932-2019)所列方法编制。',
-					'2、本程序根据标准公式计算凝汽器变工况特性，未对特定凝汽器进行校核，计算结果仅供参考。',
-					'3、输入区域中“凝汽器热负荷”和“冷却水流量”输入其一即可，当两项都有输入数据时，以“凝汽器热负荷”数据为准进行计算。'
+					'1、本程序依据《工业冷却塔测试规程》(DL/T 1027-2006)所列方法并参考《工程热力学(第三版)》(沈维道等)编制。',
+					'2、水蒸气的饱和参数计算依据 IAPWS-IF97 公式。',
+					'3、本程序适用于工业冷却塔测试，使用参数范围有限，所得结果仅供参考'
 				]
 			}
 		},
@@ -107,13 +107,9 @@ import * as air from '../../common/air.js';
 				let dat = uni.getStorageSync(this.storageKey);
 				if(dat && (dat.length == 4)) {
 					this.argPickIndex = parseInt(dat[0]);
-					console.log(typeof dat[0], dat[0]);
 					this.atmosphericPressure.value = dat[1];
-					console.log(typeof dat[1], dat[1]);
 					this.inputs[this.inputIndex[this.argPickIndex].first].value = dat[2];
-					console.log(typeof dat[2], dat[2]);
 					this.inputs[this.inputIndex[this.argPickIndex].second].value = dat[3];
-					console.log(typeof dat[3], dat[3]);
 					this.implCalc();
 				} else {
 					this.argPickIndex = 0;
@@ -145,7 +141,7 @@ import * as air from '../../common/air.js';
 				// 清空缓存的数据
 				uni.removeStorageSync(this.storageKey);
 				// 更新索引值
-				this.argPickIndex = event.detail.value;
+				this.argPickIndex = parseInt(event.detail.value);
 				// 设置默认值
 				let idx1 = this.inputIndex[this.argPickIndex].first;
 				let idx2 = this.inputIndex[this.argPickIndex].second;
@@ -158,12 +154,8 @@ import * as air from '../../common/air.js';
 			},
 			implCalc: function() {
 				let pp = parseFloat(this.atmosphericPressure.value); // 大气压力
-				console.log('pp= ', pp);
 				let idx = this.argPickIndex;
-				console.log('argPickIndex is ', idx);
 				let rf = this.resultIndex[idx];
-				console.log('rf = ', rf);
-				
 				switch(idx) {
 					case 0: { // 干球温度(θ) + 相对湿度(φ)
 						let theta = parseFloat(this.inputs[this.inputIndex[this.argPickIndex].first].value);
