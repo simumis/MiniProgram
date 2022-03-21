@@ -4,7 +4,7 @@
 		<label>输入区域：</label>
 		<!-- 输入部件容器，纵向排列 -->
 		<view class="input-content">
-			<view class="input-item" v-for="(item, idx) in input_text" :key="idx">
+			<view class="input-item" v-for="(item, idx) in inputs" :key="idx">
 				<view class="input-name"><text>{{item.name}}</text></view>
 				<input class="input-val" type="digit" placeholder="请输入数据" v-model="item.value"/>
 				<view class="input-unit"><text>{{item.unit}}</text></view>
@@ -45,7 +45,7 @@ import {Water, setupPX} from '../../common/jif97.js'
 export default {
 	data () {
 		return {
-			input_text: [
+			inputs: [
 				{name:'凝汽器热负荷', value:'1100', default:'1100', unit:'MW'},
 				{name:'凝汽器压力', value:'5', default:'5', unit:'kPa'},
 				{name:'冷却水入口温度', value:'20', default:'20', unit:'℃'},
@@ -81,10 +81,10 @@ export default {
 		// 装载缓存的数据
 		try{
 			let dat = uni.getStorageSync(this.storageKey);
-			if(dat && (dat.length == this.input_text.length+1)) {
+			if(dat && (dat.length == this.inputs.length+1)) {
 				this.material_index = parseInt(dat[0])
-				for(let i=0; i<this.input_text.length; i++) {
-					this.input_text[i].value = dat[i+1];
+				for(let i=0; i<this.inputs.length; i++) {
+					this.inputs[i].value = dat[i+1];
 				}
 				this.implCalc();
 			} else {
@@ -98,14 +98,14 @@ export default {
 	},
 	computed: {
 		isReady: function() {
-			if(this.input_text[0].value=='' && this.input_text[4].value=='') {
+			if(this.inputs[0].value=='' && this.inputs[4].value=='') {
 				return false;
 			}
-			for(let i=1; i<this.input_text.length; i++) {
+			for(let i=1; i<this.inputs.length; i++) {
 				if(i == 4) {
 					continue;
 				}
-				if(this.input_text[i].value == '') {
+				if(this.inputs[i].value == '') {
 					return false;
 				}
 			}
@@ -118,24 +118,24 @@ export default {
 			this.material_index = idx;
 		},
 		implCalc: function() {
-			let ps = parseFloat(this.input_text[1].value) // 凝汽器压力
-			let tw1 = parseFloat(this.input_text[2].value); // 冷却水入口温度
-			let tw2 = parseFloat(this.input_text[3].value); // 冷却水出口温度
-			let cp = parseFloat(this.input_text[5].value); // 冷却水比热
-			let rho = parseFloat(this.input_text[6].value); // 冷却水密度
-			let A = parseFloat(this.input_text[7].value); // 凝汽器换热面积
-			let d = parseFloat(this.input_text[8].value); // 冷却管外径
-			let m = parseFloat(this.input_text[9].value); // 冷却管壁厚
-			let n = parseFloat(this.input_text[10].value); // 冷却管数量
-			let fn = parseFloat(this.input_text[11].value); // 流程数
-			let bc0 = parseFloat(this.input_text[12].value); // 设计清洁系数
+			let ps = parseFloat(this.inputs[1].value); // 凝汽器压力
+			let tw1 = parseFloat(this.inputs[2].value); // 冷却水入口温度
+			let tw2 = parseFloat(this.inputs[3].value); // 冷却水出口温度
+			let cp = parseFloat(this.inputs[5].value); // 冷却水比热
+			let rho = parseFloat(this.inputs[6].value); // 冷却水密度
+			let A = parseFloat(this.inputs[7].value); // 凝汽器换热面积
+			let d = parseFloat(this.inputs[8].value); // 冷却管外径
+			let m = parseFloat(this.inputs[9].value); // 冷却管壁厚
+			let n = parseFloat(this.inputs[10].value); // 冷却管数量
+			let fn = parseFloat(this.inputs[11].value); // 流程数
+			let bc0 = parseFloat(this.inputs[12].value); // 设计清洁系数
 			// 凝汽器热负荷及冷却水流量计算
 			let Q, Gw;
-			if(this.input_text[0].value != '') {
-				Q = parseFloat(this.input_text[0].value); // 凝汽器热负荷以输入数据为准
+			if(this.inputs[0].value != '') {
+				Q = parseFloat(this.inputs[0].value); // 凝汽器热负荷以输入数据为准
 				Gw = Q * 1000 / cp / (tw2 - tw1);
 			} else {
-				Gw = parseFloat(this.input_text[4].value); // 冷却水流量
+				Gw = parseFloat(this.inputs[4].value); // 冷却水流量
 				Q = Gw * cp * (tw2 - tw1) / 1000;
 			}
 			// 
@@ -208,7 +208,7 @@ export default {
 			if(ok) {
 				// 保存输入参数
 				let dat = [this.material_index.toString()];
-				for(const item of this.input_text) {
+				for(const item of this.inputs) {
 					dat.push(item.value);
 				}
 				try{
@@ -220,7 +220,7 @@ export default {
 			}
 		},
 		onReset: function(e) {
-			for(let item of this.input_text) {
+			for(let item of this.inputs) {
 				 item.value = item.default;
 			}
 			// 默认管材设为钛合金
@@ -233,7 +233,7 @@ export default {
 			uni.removeStorageSync(this.storageKey);
 		},
 		onClear: function(e) {
-			for(let item of this.input_text) {
+			for(let item of this.inputs) {
 				item.value = '';
 			}
 			// 清除输出结果

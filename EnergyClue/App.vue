@@ -160,8 +160,8 @@
 	}
 	.picker-hint {
 		text-align: right;
-		width: 300rpx;
 		background-color: lightgray;
+		padding-left: 5px;
 		padding-right: 5px;
 		padding-top: 5px;
 		padding-bottom: 5px;

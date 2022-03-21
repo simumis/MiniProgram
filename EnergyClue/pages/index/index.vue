@@ -24,18 +24,25 @@
 							page: '/pages/if97/if97'
 						},
 						right: {
-							name: '凝汽器变工况',
-							image: '/static/condenser.png',
-							page: '/pages/condenser/condenser'
+							name: '湿空气性质',
+							image: '/static/logo.png',
+							page: '/pages/humid/humid'
 						}
 					},
 					{
 						left: {
+							name: '凝汽器变工况',
+							image: '/static/condenser.png',
+							page: '/pages/condenser/condenser'
+						},
+						right: {
 							name: '凝汽器清洁度',
 							image: '/static/clean.png',
 							page: '/pages/condenser/cleanliness'
-						},
-						right: {
+						}
+					},
+					{
+						left:  {
 							name: '关于',
 							image: '/static/about.png',
 							page: '/pages/about/about'

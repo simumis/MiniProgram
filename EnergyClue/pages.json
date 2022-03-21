@@ -42,6 +42,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/humid/humid",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "湿空气性质",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
