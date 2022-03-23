@@ -96,7 +96,8 @@ import * as air from '../../common/air.js';
 				notes: [
 					'1、本程序依据《工业冷却塔测试规程》(DL/T 1027-2006)所列方法并参考《工程热力学(第三版)》(沈维道等)编制。',
 					'2、水蒸气的饱和参数计算依据 IAPWS-IF97 公式。',
-					'3、本程序所采用公式基本出自冷却塔测试规程，使用范围有限，所得结果仅供参考。'
+					'3、本程序所采用公式基本出自冷却塔测试规程，使用范围有限，所得结果仅供参考。',
+					'4、当前暂定温度有效范围为[0℃, 100℃]。'
 				]
 			}
 		},
@@ -160,12 +161,40 @@ import * as air from '../../common/air.js';
 					case 0: { // 干球温度(θ) + 相对湿度(φ)
 						let theta = parseFloat(this.inputs[this.inputIndex[this.argPickIndex].first].value);
 						let phi = parseFloat(this.inputs[this.inputIndex[this.argPickIndex].second].value);
-						let ps = air.ps(theta);
+						if(theta<0 || theta>100 || phi<0 || phi>100) {
+							uni.showModal({
+								title: '警告',
+								content: '输入数据超出有效范围！',
+								showCancel: false
+							});
+							return false;
+						}
+						let ps;
+						try{
+							ps = air.ps(theta);
+						}catch(e){
+							uni.showModal({
+								title: '警告',
+								content: e.message,
+								showCancel: false
+							});
+							return false;
+						}
 						let pv = phi / 100 * ps;
 						let dd = air.specificHumidity(pp, pv); // 含湿量
 						let hh = air.enthalpy(theta, dd);
 						let rho = air.density(theta, pp, pv); // 密度
-						let td = air.ts(pv);
+						let td;
+						try{
+							td = air.ts(pv);
+						}catch(e){
+							uni.showModal({
+								title: '警告',
+								content: e.message,
+								showCancel: false
+							});
+							return false;
+						}
 						// 输出结果
 						this.results[rf[0]].value = dd.toPrecision(4);
 						this.results[rf[1]].value = td.toPrecision(4);
@@ -178,12 +207,48 @@ import * as air from '../../common/air.js';
 					case 1: { // 干球温度(θ) + 含湿量(d)
 						let theta = parseFloat(this.inputs[this.inputIndex[this.argPickIndex].first].value);
 						let dd = parseFloat(this.inputs[this.inputIndex[this.argPickIndex].second].value);
-						let ps = air.ps(theta);
+						if(theta<0 || theta>100) {
+							uni.showModal({
+								title: '警告',
+								content: '输入数据超出有效范围！',
+								showCancel: false
+							});
+							return false;
+						}
+						let ps;
+						try{
+							pa = air.ps(theta);
+						}catch(e){
+							uni.showModal({
+								title: '警告',
+								content: e.message,
+								showCancel: false
+							});
+							return false;
+						}
 						let pv = air.pv(pp, dd);
 						let phi = pv / ps * 100;
+						if(phi<0 || phi>100) {
+							uni.showModal({
+								title: '警告',
+								content: '输入数据超出有效范围！',
+								showCancel: false
+							});
+							return false;
+						}
 						let hh = air.enthalpy(theta, dd);
 						let rho = air.density(theta, pp, pv); // 密度
-						let td = air.ts(pv);
+						let td;
+						try{
+							td = air.ts(pv);
+						}catch(e){
+							uni.showModal({
+								title: '警告',
+								content: e.message,
+								showCancel: false
+							});
+							return false;
+						}
 						// 输出结果
 						this.results[rf[0]].value = phi.toPrecision(4);
 						this.results[rf[1]].value = td.toPrecision(4);
@@ -196,11 +261,39 @@ import * as air from '../../common/air.js';
 					case 2: { // 露点温度(td) + 比焓(h)
 						let td = parseFloat(this.inputs[this.inputIndex[this.argPickIndex].first].value);
 						let hh = parseFloat(this.inputs[this.inputIndex[this.argPickIndex].second].value);
-						let pv = air.ps(td);
+						let pv;
+						try{
+							pv = air.ps(td);
+						}catch(e){
+							uni.showModal({
+								title: '警告',
+								content: e.message,
+								showCancel: false
+							});
+							return false;
+						}
 						let dd = air.specificHumidity(pp, pv);
 						let theta = air.theta(hh, dd);
-						let ps = air.ps(theta);
+						let ps;
+						try{
+							ps = air.ps(theta);
+						}catch(e){
+							uni.showModal({
+								title: '警告',
+								content: e.message,
+								showCancel: false
+							});
+							return false;
+						}
 						let phi = pv / ps * 100;
+						if(theta<0 || theta>100 || phi<0 || phi>100) {
+							uni.showModal({
+								title: '警告',
+								content: '输入数据超出有效范围！',
+								showCancel: false
+							});
+							return false;
+						}
 						let rho = air.density(theta, pp, pv); // 密度
 						// 输出结果
 						this.results[rf[0]].value = theta.toPrecision(4);

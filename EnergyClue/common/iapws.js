@@ -17,10 +17,6 @@ const sublTmin = 50;
  * @return {Number} 单位：Pa
  */
 function sublimationPressure(T) {
-	if(T<sublTmin || T>Tt) {
-		throw new Error(`sublimationPressure: 输入数值超出有效范围: ${T}`);
-		return NaN;
-	}
 	const a = [-0.212144006E2, 0.273203819E2, -0.610598130E1];
 	const b = [0.333333333E-2, 0.120666667E1, 0.170333333E1];
 	const p_star = pt;
@@ -38,11 +34,6 @@ function sublimationPressure(T) {
  * @param {Number} p - 压力，单位：Pa
  */
 function sublimationTemperature(p) {
-	let sublp = sublimationPressure(sublTmin);
-	if(p<sublp || p>pt) {
-			throw new Error(`sublimationTemperature: 输入数值超出有效范围: ${p}, ${sublp}`);
-			return NaN;
-	}
 	let f = function(T) {
 		return sublimationPressure(T) - p;
 	};
@@ -57,10 +48,6 @@ function sublimationTemperature(p) {
  * @param {Number} T - 热力学温度，单位：K
  */
 function saturationPressure(T) {
-	if(T<Tt || T>Tc) {
-		throw new Error(`saturationPressure: 输入数值超出有效范围: ${T}`);
-		return NaN;
-	}
 	const t_star = 1.0;
 	const p_star = 1.0e6;
 	const nr = [0.0, 0.11670521452767e+04, -0.72421316703206e+06, -0.17073846940092e+02, 0.12020824702470e+05, -0.32325550322333e+07, 0.14915108613530e+02, -0.48232657361591e+04, 0.40511340542057e+06, -0.23855557567849e+00, 0.65017534844798e+03];
@@ -82,10 +69,6 @@ function saturationPressure(T) {
  * @param {Number} p - 压力，单位：Pa
  */
 function saturationTemperature(p) {
-	if(p<pt || p>pc) {
-		throw new Error(`saturationTemperature: 输入数值超出有效范围: ${p}`);
-		return NaN;
-	}
 	const t_star = 1.0;
 	const p_star = 1.0e6;
 	const nr = [0.0, 0.11670521452767e+04, -0.72421316703206e+06, -0.17073846940092e+02, 0.12020824702470e+05, -0.32325550322333e+07, 0.14915108613530e+02, -0.48232657361591e+04, 0.40511340542057e+06, -0.23855557567849e+00, 0.65017534844798e+03];

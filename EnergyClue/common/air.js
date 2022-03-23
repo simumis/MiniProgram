@@ -12,7 +12,7 @@ import * as iapws from './iapws.js';
 function ps(t) {
 	let T = t + 273.15; // ℃->K
 	if(T<iapws.sublTmin || T>iapws.Tc) {
-		throw new Error('ps: 输入数值超出有效范围！');
+		throw new Error('输入数值超出有效范围！');
 		return NaN;
 	}
 	let res;
@@ -21,11 +21,9 @@ function ps(t) {
 	} else {
 		res = iapws.sublimationPressure(T);
 	}
-	if(isNaN(res)) {
-		return res;
-	} else {
-		return res / 1E3;
-	}
+	// Pa->kPa
+	return res / 1E3;
+	
 	// 纪利公式，暂时不用
 	//let lgps = 5.005717 - 3.142305 * (1000.0/T - 1000.0/373.16) + 8.2 * Math.log10(373.16/T) - 0.0024804 * (373.16 - T);
 	//return Math.pow(10, lgps);
@@ -37,17 +35,19 @@ function ps(t) {
  */
 function ts(p) {
 	let pp = p * 1E3; // kPa->Pa
+	let pmin = iapws.sublimationPressure(iapws.sublTmin);
+	if(p<iapws.pmin || p>iapws.pc) {
+		throw new Error('输入数值超出有效范围！');
+		return NaN;
+	}
 	let res;
 	if(pp >= iapws.pt) {
 		res = iapws.saturationTemperature(pp);
 	} else {
 		res = iapws.sublimationTemperature(pp);
 	}
-	if(!isNaN(res)) {
-		return res - 273.15;
-	} else {
-		return res;
-	}
+	// K->℃
+	return res - 273.15;
 }
 
 /** 湿空气比焓
