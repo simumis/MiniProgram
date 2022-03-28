@@ -42,7 +42,7 @@ function ps(t) {
 function ts(p) {
 	let pp = p * 1E3; // kPa->Pa
 	let pmin = iapws.sublimationPressure(iapws.sublTmin);
-	if(p<iapws.pmin || p>iapws.pc) {
+	if(p<pmin || p>iapws.pc) {
 		throw new Error('输入数值超出有效范围！');
 		return NaN;
 	}
