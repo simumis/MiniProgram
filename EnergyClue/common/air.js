@@ -5,6 +5,12 @@
  */
 import * as iapws from './iapws.js';
 
+const Constants = {
+	R: 8314.471, // 通用气体常数 J／(kmol·K)
+	Ma: 28.9586, // 空气摩尔质量 kg/kmol
+	Mv: 18.015268, // 水蒸气摩尔质量 kg/kmol
+};
+
 /** 饱和水蒸气压力
  * @param {Number} t - 温度，单位：℃
  * @return {Number} 饱和水蒸气压力，单位：kPa
@@ -109,4 +115,15 @@ function relativeHumidity(theta, tau, pa, A) {
 	return (ps(tau) - A * pa * 1000 * (theta - tau)) / ps(theta);
 }
 
-export {ps, ts, enthalpy, theta, density, specificHumidity, pv, relativeHumidity};
+/**
+ * @param {Number} pa - 大气压力，单位：kPa
+ * @param {Number} theta - 空气的干球温度，单位：℃
+ * @param {Number} d - 含湿量，单位：kg/kg[DA]
+ * @return {Number} m³/kg[DA]
+ */
+function specificVolume(pa, theta, d) {
+	//return 0.23;
+	return (theta + 273.15) / (pa*1000) * (Constants.R/Constants.Ma + d * Constants.R/Constants.Mv);
+}
+
+export {Constants, ps, ts, enthalpy, theta, density, specificHumidity, pv, relativeHumidity, specificVolume};

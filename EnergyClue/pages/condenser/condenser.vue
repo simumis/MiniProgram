@@ -61,11 +61,16 @@ export default {
 			tube_materials: ['HSn70-1(锡黄铜)', 'HA177-2(铝黄铜)', 'BFe30-1-1(铁白铜)', 'BFe10-1-1(铁白铜)', '碳钢', 'TP304,TP316,TP317(不锈钢)', 'TA1,TA2(钛合金)'],
 			material_index: -1,
 			results: [
-				{name:'凝汽器饱和温度', value:'', unit:'℃'},
-				{name:'凝汽器饱和压力', value:'', unit:'kPa'},
-				{name:'冷却水出口温度', value:'', unit:'℃'},
-				{name:'冷却水温升', value:'', unit:'℃'},
-				{name:'凝汽器端差', value:'', unit:'℃'}
+				{name:'冷却水管内流速', value:'', unit:'m/s'}, // 0
+				{name:'基本传热系数', value:'', unit:'kW/(m²·℃)'}, // 1
+				{name:'冷却水温修正系数', value:'', unit:''}, // 2
+				{name:'管材和壁厚修正系数', value:'', unit:''}, // 3
+				{name:'总体传热系数', value:'', unit:'kW/(m²·℃)'}, // 4
+				{name:'凝汽器饱和温度', value:'', unit:'℃'}, // 5
+				{name:'凝汽器饱和压力', value:'', unit:'kPa'}, // 6
+				{name:'冷却水出口温度', value:'', unit:'℃'}, // 7
+				{name:'冷却水温升', value:'', unit:'℃'}, // 8
+				{name:'凝汽器端差', value:'', unit:'℃'} // 9
 			],
 			storageKey: '__condenser_input',
 			notes: [
@@ -121,8 +126,8 @@ export default {
 			let bc = parseFloat(this.input_text[9].value); // 清洁系数
 			let rho = parseFloat(this.input_text[10].value); // 冷却水密度
 			// 
-			let v = dlt932.velocity(Gw, d, m, n, fn, rho);
-			let K0;
+			let v = dlt932.velocity(Gw, d, m, n, fn, rho); // 冷却水管内流速
+			let K0; // 基本传热系数
 			try{
 				K0 = dlt932.K0(d, v);
 			}catch(e){
@@ -139,10 +144,10 @@ export default {
 				return false;
 			}
 			
-			let bt = dlt932.bt(tw1);
-			let bm = dlt932.bm(this.material_index, m);
-			let K = dlt932.K(K0, bt, bm, bc);
-			let ts = dlt932.satTemperature(Q, tw1, Gw, cp, A, K);
+			let bt = dlt932.bt(tw1); // 冷却水进口温度修正系数
+			let bm = dlt932.bm(this.material_index, m); // 管材和管壁厚修正系数
+			let K = dlt932.K(K0, bt, bm, bc); // 总体传热系数
+			let ts = dlt932.satTemperature(Q, tw1, Gw, cp, A, K); // 凝汽器饱和温度
 			let water = setupTX(ts, 1);
 			if(water == null) {
 				// 清除输出结果
@@ -162,11 +167,16 @@ export default {
 			let delta = ts - tw2; // 凝汽器端差
 			
 			// 输出结果
-			this.results[0].value = ts.toPrecision(4);
-			this.results[1].value = ps.toPrecision(4);
-			this.results[2].value = tw2.toPrecision(4);
-			this.results[3].value = dt.toPrecision(4);
-			this.results[4].value = delta.toPrecision(4);
+			this.results[0].value = v.toPrecision(4);
+			this.results[1].value = K0.toPrecision(4);
+			this.results[2].value = bt.toPrecision(4);
+			this.results[3].value = bm.toPrecision(4);
+			this.results[4].value = K.toPrecision(4);
+			this.results[5].value = ts.toPrecision(4);
+			this.results[6].value = ps.toPrecision(4);
+			this.results[7].value = tw2.toPrecision(4);
+			this.results[8].value = dt.toPrecision(4);
+			this.results[9].value = delta.toPrecision(4);
 			
 			// 成功返回
 			return true;

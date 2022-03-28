@@ -85,12 +85,13 @@ import * as air from '../../common/air.js';
 					{name:'密度(ρ)', value:'', unit:'kg/m³'}, // 4
 					{name:'比焓(h)', value:'', unit:'kJ/kg[DA]'}, // 5
 					{name:'水蒸气分压力(pv)', value:'', unit:'kPa'}, // 6
-					{name:'水蒸气饱和压力(ps)', value:'', unit:'kPa'} // 7
+					{name:'水蒸气饱和压力(ps)', value:'', unit:'kPa'}, // 7
+					{name:'比容(v)', value:'', unit:'m³/kg[DA]'} // 8
 				],
 				resultIndex: [
-					[2, 3, 4, 5, 6, 7], // 干球温度(θ) + 相对湿度(φ)
-					[1, 3, 4, 5, 6, 7], // 干球温度(θ) + 含湿量(d)
-					[0, 1, 2, 3, 6, 7], // 露点温度(td) + 比焓(h)
+					[2, 3, 4, 5, 6, 7, 8], // 干球温度(θ) + 相对湿度(φ)
+					[1, 3, 4, 5, 6, 7, 8], // 干球温度(θ) + 含湿量(d)
+					[0, 1, 2, 3, 6, 7, 8], // 露点温度(td) + 比焓(h)
 				],
 				storageKey: '__humid_input',
 				notes: [
@@ -157,6 +158,7 @@ import * as air from '../../common/air.js';
 				let pp = parseFloat(this.atmosphericPressure.value); // 大气压力
 				let idx = this.argPickIndex;
 				let rf = this.resultIndex[idx];
+				const precision = 6; // 输出精度
 				switch(idx) {
 					case 0: { // 干球温度(θ) + 相对湿度(φ)
 						let theta = parseFloat(this.inputs[this.inputIndex[this.argPickIndex].first].value);
@@ -195,13 +197,15 @@ import * as air from '../../common/air.js';
 							});
 							return false;
 						}
+						let vv = air.specificVolume(pp, theta, dd); // 比容
 						// 输出结果
-						this.results[rf[0]].value = dd.toPrecision(4);
-						this.results[rf[1]].value = td.toPrecision(4);
-						this.results[rf[2]].value = rho.toPrecision(4);
-						this.results[rf[3]].value = hh.toPrecision(4);
-						this.results[rf[4]].value = pv.toPrecision(4);
-						this.results[rf[5]].value = ps.toPrecision(4);
+						this.results[rf[0]].value = dd.toPrecision(precision);
+						this.results[rf[1]].value = td.toPrecision(precision);
+						this.results[rf[2]].value = rho.toPrecision(precision);
+						this.results[rf[3]].value = hh.toPrecision(precision);
+						this.results[rf[4]].value = pv.toPrecision(precision);
+						this.results[rf[5]].value = ps.toPrecision(precision);
+						this.results[rf[6]].value = vv.toPrecision(precision);
 					}
 						break;
 					case 1: { // 干球温度(θ) + 含湿量(d)
@@ -217,7 +221,7 @@ import * as air from '../../common/air.js';
 						}
 						let ps;
 						try{
-							pa = air.ps(theta);
+							ps = air.ps(theta);
 						}catch(e){
 							uni.showModal({
 								title: '警告',
@@ -249,13 +253,15 @@ import * as air from '../../common/air.js';
 							});
 							return false;
 						}
+						let vv = air.specificVolume(pp, theta, dd); // 比容
 						// 输出结果
-						this.results[rf[0]].value = phi.toPrecision(4);
-						this.results[rf[1]].value = td.toPrecision(4);
-						this.results[rf[2]].value = rho.toPrecision(4);
-						this.results[rf[3]].value = hh.toPrecision(4);
-						this.results[rf[4]].value = pv.toPrecision(4);
-						this.results[rf[5]].value = ps.toPrecision(4);
+						this.results[rf[0]].value = phi.toPrecision(precision);
+						this.results[rf[1]].value = td.toPrecision(precision);
+						this.results[rf[2]].value = rho.toPrecision(precision);
+						this.results[rf[3]].value = hh.toPrecision(precision);
+						this.results[rf[4]].value = pv.toPrecision(precision);
+						this.results[rf[5]].value = ps.toPrecision(precision);
+						this.results[rf[6]].value = vv.toPrecision(precision);
 					}
 						break;
 					case 2: { // 露点温度(td) + 比焓(h)
@@ -295,13 +301,15 @@ import * as air from '../../common/air.js';
 							return false;
 						}
 						let rho = air.density(theta, pp, pv); // 密度
+						let vv = air.specificVolume(pp, theta, dd); // 比容
 						// 输出结果
-						this.results[rf[0]].value = theta.toPrecision(4);
-						this.results[rf[1]].value = phi.toPrecision(4);
-						this.results[rf[2]].value = dd.toPrecision(4);
-						this.results[rf[3]].value = rho.toPrecision(4);
-						this.results[rf[4]].value = pv.toPrecision(4);
-						this.results[rf[5]].value = ps.toPrecision(4);
+						this.results[rf[0]].value = theta.toPrecision(precision);
+						this.results[rf[1]].value = phi.toPrecision(precision);
+						this.results[rf[2]].value = dd.toPrecision(precision);
+						this.results[rf[3]].value = rho.toPrecision(precision);
+						this.results[rf[4]].value = pv.toPrecision(precision);
+						this.results[rf[5]].value = ps.toPrecision(precision);
+						this.results[rf[6]].value = vv.toPrecision(precision);
 					}
 						break;
 					default:
