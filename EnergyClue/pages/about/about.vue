@@ -17,7 +17,7 @@
 	export default {
 		data() {
 			return {
-				_version: '0.1.3',
+				_version: '0.1.4',
 				notes: [
 					'1、本软件基于 [uni-app](https://uniapp.dcloud.io/) 制作，采用 MIT 版权协议。',
 					'2、本软件代码托管在 [GitHub](https://github.com/simumis/MiniProgram) 网站。',

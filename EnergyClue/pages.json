@@ -51,6 +51,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/turbine/turbine",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "汽轮机缸效率",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

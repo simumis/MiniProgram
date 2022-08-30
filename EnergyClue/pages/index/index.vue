@@ -42,7 +42,12 @@
 						}
 					},
 					{
-						left:  {
+						left: {
+							name: '缸效率计算',
+							image: '/static/turbine.png',
+							page: '/pages/turbine/turbine'
+						},
+						right:  {
 							name: '关于',
 							image: '/static/about.png',
 							page: '/pages/about/about'

@@ -49,7 +49,7 @@
 </template>
 
 <script>
-	import * as jif97 from '../../common/jif97.js'
+	import * as jif97 from '@/common/jif97.js'
 	export default {
 		data() {
 			return {

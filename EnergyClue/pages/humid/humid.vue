@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import * as air from '../../common/air.js';
+	import * as air from '@/common/air.js';
 	export default {
 		data() {
 			return {
