@@ -1,11 +1,23 @@
 <template>
 	<!-- 首页放置导航按钮，每行并排放两个 -->
 	<view class="content">
+		<!-- 创建工具按钮 -->
+		<label><text>实用工具：</text></label>
 		<view class="utils-area">
 			<view class="utils-panel" v-for="(item, idx) in utils" :key="idx">
 				<view class="utils-item" hover-class="utils-item-hover" v-for="(util,i) in item" :key="i" @click="goto(util.page)">
 					<image class="utils-item-img" :src="util.image"></image>
 					<text class="utils-item-text">{{util.name}}</text>
+				</view>
+			</view>
+		</view>
+		<!-- 创建帮助按钮 -->
+		<label><text>帮助：</text></label>
+		<view class="utils-area">
+			<view class="utils-panel" v-for="(item, idx) in helps" :key="idx">
+				<view class="utils-item" hover-class="utils-item-hover" v-for="(help,i) in item" :key="i" @click="goto(help.page)">
+					<image class="utils-item-img" :src="help.image"></image>
+					<text class="utils-item-text">{{help.name}}</text>
 				</view>
 			</view>
 		</view>
@@ -46,14 +58,18 @@
 							name: '缸效率计算',
 							image: '/static/turbine.png',
 							page: '/pages/turbine/turbine'
-						},
-						right:  {
-							name: '关于',
-							image: '/static/about.png',
-							page: '/pages/about/about'
 						}
 					}
 				],
+				helps: [
+					{
+						left: {
+							name: '关于',
+							image: '/static/about.png',
+							page: '/pages/about/about'
+						},
+					},
+				]
 			}
 		},
 		onLoad() {
@@ -81,6 +97,7 @@
 		flex-direction: column;
 		align-items: stretch;
 		justify-content: center;
+		width: 100%;
 	}
 	
 	.utils-panel {
