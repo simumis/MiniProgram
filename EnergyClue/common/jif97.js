@@ -3644,4 +3644,4 @@ function jif97_test3() {
 	console.log("max:", pp, tt, eps);
 }
 
-export {Water, props, setupPT, setupPH, setupPS, setupHS, setupPX, setupTX, setupPTsi, setupPHsi, setupPSsi, setupHSsi, setupPXsi, setupTXsi};
+export {Water, props, setupPT, setupPH, setupPS, setupHS, setupPX, setupTX, setupPTsi, setupPHsi, setupPSsi, setupHSsi, setupPXsi, setupTXsi, fzero};

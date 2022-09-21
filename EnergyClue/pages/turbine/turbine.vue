@@ -73,7 +73,6 @@
 					}
 					this.implCalc();
 				} else {
-				console.log('get in onLoad()')
 					for (let i=0; i<4; i++) {
 						this.inputs[i].value = this.inputs[i].default;
 					}

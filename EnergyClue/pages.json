@@ -60,6 +60,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/leakage/leakage",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "过桥汽封泄漏量",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -58,6 +58,11 @@
 							name: '缸效率计算',
 							image: '/static/turbine.png',
 							page: '/pages/turbine/turbine'
+						},
+						right: {
+							name: '过桥汽封泄漏量',
+							image: '/static/leakage.png',
+							page: '/pages/leakage/leakage'
 						}
 					}
 				],
