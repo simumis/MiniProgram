@@ -2,7 +2,7 @@
     "name" : "EnergyClue",
     "appid" : "__UNI__07A1C82",
     "description" : "火电厂节能计算小工具",
-    "versionName" : "0.1.4",
+    "versionName" : "0.1.5",
     "versionCode" : 10,
     "transformPx" : false,
     /* 5+App特有相关 */
