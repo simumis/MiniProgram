@@ -3261,6 +3261,9 @@ function r5Gamma_r(pi, tau) {
 	return res;
 }
 
+// 实现解一元非线性方程功能，提供统一接口“fzero”函数。
+// 为防止死循环，设置最大迭代次数。当达到最大迭代次数时抛出异常并返回当前计算结果，该结果可能无法达到精确度要求。
+var maxIterationTimes = 1000;
 
 /// Bisection
 //
@@ -3283,7 +3286,7 @@ function bisection(f, xa, xb, tol) {
 		}
 		return res;
 	}
-	for (;;) {
+	for (let i=0; i<maxIterationTimes; i++) {
 		xm = (xa + xb) / 2.0;
 		ym = f(xm);
 		if (Math.abs(ym) < tol || Math.abs((xb - xa) / xa) < tol) {
@@ -3299,6 +3302,8 @@ function bisection(f, xa, xb, tol) {
 			yb = ym;
 		}
 	}
+	throw new Error("Error-bisection: 迭代未收敛。");
+	return xm; // 迭代结束，结果可能不准确。
 }
 
 /// Newton
@@ -3307,7 +3312,7 @@ function newton(f, df, x0, tol) {
 	let x1, y0, dy0;
 	let res;
 
-	for (;;) {
+	for (let i=0; i<maxIterationTimes; i++) {
 		y0 = f(x0);
 		if (Math.abs(y0) < tol) {
 			res = x0;
@@ -3329,6 +3334,8 @@ function newton(f, df, x0, tol) {
 		}
 		x0 = x1;
 	}
+	throw new Error("Error-newton: 迭代未收敛。");
+	return x0; // 迭代结束，结果可能不准确。
 }
 
 /// Secant
@@ -3337,7 +3344,7 @@ function secant(f, x0, x1, tol) {
 	var y0, y1, x2;
 	var res;
 
-	for (let i = 0; ; i++) {
+	for (let i = 0; i<maxIterationTimes; i++) {
 		y0 = f(x0);
 		if (Math.abs(y0) < tol) {
 			res = x0;
@@ -3359,6 +3366,8 @@ function secant(f, x0, x1, tol) {
 		x0 = x1;
 		x1 = x2;
 	}
+	throw new Error("Error-secanat: 迭代未收敛。");
+	return x0; // 迭代结束，结果可能不准确。
 }
 
 /// Brent
@@ -3379,7 +3388,7 @@ function brent(f /*Zerofunction*/, xa /*float64*/, xb /*float64*/, tol /*float64
 
 	var tol_act, m, p, q, r, s;
 
-	for(;;) {
+	for(let i=0; i<maxIterationTimes; i++) {
 		if (Math.abs(fc) < Math.abs(fb)) {
 			a = b;
 			b = c;
@@ -3451,6 +3460,9 @@ function brent(f /*Zerofunction*/, xa /*float64*/, xb /*float64*/, tol /*float64
 			e = d;
 		}
 	} // for
+	
+	throw new Error("Error-brent: 迭代未收敛。");
+	return b; // 迭代结束，结果可能不准确。
 } // function
 
 /** fzero - 求形如 f(x)=0 方程的根
@@ -3488,7 +3500,13 @@ function fzero(f, xa, xb, tol, x0=null, df=null) {
 	}
 	// If ya and yb have opposite sign, we can use brent method
 	if ((ya < 0.0 && yb > 0.0) || (ya > 0.0 && yb < 0.0)) {
-		return brent(f, xa, xb, tol);
+		try{
+			res = brent(f, xa, xb, tol);
+		}catch(e){
+			//TODO handle the exception
+			throw e;
+		}
+		return res;
 	}
 
 	// Now we shoud use the newton method or secant method.
@@ -3512,9 +3530,15 @@ function fzero(f, xa, xb, tol, x0=null, df=null) {
 		}
 	}
 
-	// Newton
+	// Newton or secant
 	if (df != null) {
-		return newton(f, df, x0, tol);
+		try{
+			res = newton(f, df, x0, tol);
+		}catch(e){
+			//TODO handle the exception
+			throw e;
+		}
+		return res;
 	} else {
 		let dh = 1.0e-4 * (xb - xa);
 		if (x0-dh < xa) {
@@ -3530,7 +3554,13 @@ function fzero(f, xa, xb, tol, x0=null, df=null) {
 				x1 = p;
 			}
 		}
-		return secant(f, x0, x1, tol);
+		try{
+			res = secant(f, x0, x1, tol);
+		}catch(e){
+			//TODO handle the exception
+			throw e;
+		}
+		return res;
 	}
 }
 

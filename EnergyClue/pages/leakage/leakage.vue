@@ -254,7 +254,18 @@
 				// 计算泄露率
 				let xa = 0;
 				let xb = 1;
-				delta = jif97.fzero(f, xa, xb, 1E-6);
+				try{
+					delta = jif97.fzero(f, xa, xb, 1E-6);
+				}catch(e){
+					//TODO handle the exception
+					uni.showModal({
+						title: '警告',
+						content: '求解过程未收敛，结果可能有误。请检查输入数据是否正确。',
+						showCancel: false
+					});
+					console.log(e);
+				}
+				
 				eta = effi(delta, h10, s10, h1z, s1z, p12, t12, h12);
 				
 				// 设置输出
