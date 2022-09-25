@@ -69,6 +69,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/air_preheater/air_preheater",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "空气预热器漏风率",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -64,6 +64,13 @@
 							image: '/static/leakage.png',
 							page: '/pages/leakage/leakage'
 						}
+					},
+					{
+						left: {
+							name: '空预器漏风率',
+							image: '/static/air_preheater.png',
+							page: '/pages/air_preheater/air_preheater'
+						}
 					}
 				],
 				helps: [
