@@ -134,7 +134,6 @@
 					return false;
 				}
 				let h10 = water.h / 1000.0;
-				let s10 = water.s / 1000.0;
 				// 再热蒸汽参数
 				let p1z = parseFloat(this.test1[2].value);
 				let t1z = parseFloat(this.test1[3].value);
@@ -152,7 +151,6 @@
 					return false;
 				}
 				let h1z = water.h / 1000.0;
-				let s1z = water.s / 1000.0;
 				// 中压缸排汽参数
 				let p12 = parseFloat(this.test1[4].value);
 				let t12 = parseFloat(this.test1[5].value);
@@ -189,7 +187,6 @@
 					return false;
 				}
 				let h20 = water.h / 1000.0;
-				let s20 = water.s / 1000.0;
 				// 再热蒸汽参数
 				let p2z = parseFloat(this.test2[2].value);
 				let t2z = parseFloat(this.test2[3].value);
@@ -207,7 +204,6 @@
 					return false;
 				}
 				let h2z = water.h / 1000.0;
-				let s2z = water.s / 1000.0;
 				// 中压缸排汽参数
 				let p22 = parseFloat(this.test2[4].value);
 				let t22 = parseFloat(this.test2[5].value);
@@ -227,11 +223,16 @@
 				let h22 = water.h / 1000.0;
 				
 				// 定义中压缸效率计算函数
-				let effi = function(x, h0, s0, hz, sz, p2, t2, h2) {
+				let effi = function(x, h0, pz, hz, p2, h2) {
 					let water; //
-					// 计算混合蒸汽参数
+					// 计算混合蒸汽焓
 					let h1 = (x * h0 + hz) / (1.0 + x);
-					let s1 = (x * s0 + sz) / (1.0 + x);
+					// 计算混合蒸汽熵。混合蒸汽压力取再热蒸汽压力。
+					water = jif97.props('p', pz, 'h', h1);
+					if(water == null) {
+						return null;
+					}
+					let s1 = water.s / 1000.0;
 					
 					// 计算等熵焓
 					water = jif97.props('p', p2, 's', s1);
@@ -245,8 +246,8 @@
 				
 				// 定义迭代函数
 				let f = function(x) {
-					let e1 = effi(x, h10, s10, h1z, s1z, p12, t12, h12);
-					let e2 = effi(x, h20, s20, h2z, s2z, p22, t22, h22);
+					let e1 = effi(x, h10, p1z, h1z, p12, h12);
+					let e2 = effi(x, h20, p2z, h2z, p22, h22);
 					if(e1 == null || e2 == null) {
 						return Number.MAX_VALUE;
 					}
@@ -268,7 +269,10 @@
 					console.log(e);
 				}
 				
-				eta = effi(delta, h10, s10, h1z, s1z, p12, t12, h12);
+				eta = effi(delta, h10, p1z, h1z, p12, h12);
+				if(eta == null) {
+					return false;
+				}
 				
 				// 设置输出
 				this.results[0].value = (100*delta).toPrecision(precision);
