@@ -72,7 +72,7 @@
 				storageKey: '__leakage_input',
 				notes: [
 					'1、本程序利用变汽温法计算高中压合缸汽轮机过桥汽封泄露率和中压缸实际效率。',
-					'2、过桥汽封泄漏率为过桥汽封漏汽量与再热蒸汽量的比值。',
+					'2、过桥汽封泄漏率为过桥汽封漏汽量与再热蒸汽量的质量流量比值。',
 					'3、水蒸气的参数计算依据 IAPWS-IF97 公式。',
 					'4、输入的蒸汽压力均为绝对压力。',
 					'5、程序中默认输入数据取自参考文献：张志恒, 曹学宝, 孙大川. 变汽温法测试过桥漏汽量的应用分析[J]. 东北电力技术, 2016, 37(5):4.',
@@ -104,7 +104,7 @@
 		computed: {
 			isReady: function() {
 				for (let i=0; i<6; i++) {
-					if((this.test1[i].value == '') || (this.test2[i].value == '')) {
+					if((this.test1[i].value == '') || isNaN(parseFloat(this.test1[i].value)) || (this.test2[i].value == '') || isNaN(parseFloat(this.test2[i].value))) {
 						return false;
 					}
 				}

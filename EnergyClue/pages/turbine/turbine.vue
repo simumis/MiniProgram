@@ -58,7 +58,7 @@
 				storageKey: '__turbine_input',
 				notes: [
 					'1、本程序适用于过热蒸汽区缸效率计算。',
-					'2、水蒸气的饱和参数计算依据 IAPWS-IF97 公式。',
+					'2、水蒸气的参数计算依据 IAPWS-IF97 公式。',
 					'3、输入的蒸汽压力均为绝对压力。'
 				]
 			}
@@ -85,7 +85,7 @@
 		computed: {
 			isReady: function() {
 				for (let i=0; i<this.inputs.length; i++) {
-					if(this.inputs[i].value == '') {
+					if((this.inputs[i].value == '' || isNaN(parseFloat(this.inputs[i].value)))) {
 						return false;
 					}
 				}

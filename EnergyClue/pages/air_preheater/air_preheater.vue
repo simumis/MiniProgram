@@ -78,7 +78,7 @@
 		computed: {
 			isReady: function() {
 				for (let i=0; i<this.inputs.length; i++) {
-					if(this.inputs[i].value == '') {
+					if((this.inputs[i].value == '') || (isNaN(parseFloat(this.inputs[i].value)))) {
 						return false;
 					}
 				}
@@ -93,7 +93,6 @@
 				// 计算过量空气系数
 				let A1 = 21.0 / (21.0 - A0);
 				let B1 = 21.0 / (21.0 - B0);
-				console.log(A1, B1);
 				let cc = B1 - A1;
 				let dd = (cc / A1) * 90.0;
 				// 设置输出

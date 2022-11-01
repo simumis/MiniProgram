@@ -18,7 +18,7 @@
 			</view>
 			<!-- 计算按钮 -->
 			<view class="calc">
-				<button class="calc-button-main" hover-class="calc-button-main-hover" @click="onCalc" :disabled="value1=='' || value2==''">开始计算</button>
+				<button class="calc-button-main" hover-class="calc-button-main-hover" @click="onCalc" :disabled="!isReady">开始计算</button>
 				<button class="calc-button-clear" hover-class="calc-button-clear-hover" @click="onClear">清除输入</button>
 			</view>
 		</view>
@@ -116,7 +116,14 @@
 				console.log(e.message);
 			}
 		},
-		
+		computed: {
+			isReady: function() {
+				if(this.value1 == '' || isNaN(parseFloat(this.value1)) || this.value2 == '' || isNaN(parseFloat(this.value2))) {
+					return false;
+				}
+				return true;
+			}
+		},
 		methods: {
 			//响应第一参数选项改变事件
 			//设置参数单位和第二参数选项列表

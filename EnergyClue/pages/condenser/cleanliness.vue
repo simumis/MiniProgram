@@ -114,6 +114,11 @@ export default {
 					return false;
 				}
 			}
+			for(let i=0; i<this.inputs.length; i++) {
+				if(isNaN(parseFloat(this.inputs[i].value))) {
+					return false;
+				}
+			}
 			return true;
 		}
 	},

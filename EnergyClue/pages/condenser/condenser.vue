@@ -101,7 +101,7 @@ export default {
 	computed: {
 		isReady: function(){
 			for(const item of this.input_text) {
-				if(item.value == '') {
+				if((item.value == '') || isNaN(parseFloat(item.value))) {
 					return false;
 				}
 			}
