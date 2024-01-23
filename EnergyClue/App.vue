@@ -63,6 +63,11 @@
 	/*每个页面公共css */
 	page {
 		background-color: lightgrey;
+		/* #ifdef WEB */
+		margin: auto;
+		width: 600px;
+		padding: 5px;
+		/* #endif */
 	}
 	.content {
 		display: flex;
