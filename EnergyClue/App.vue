@@ -65,7 +65,7 @@
 		background-color: lightgrey;
 		/* #ifdef WEB */
 		margin: auto;
-		width: 600px;
+		max-width: 650px;
 		padding: 5px;
 		/* #endif */
 	}
